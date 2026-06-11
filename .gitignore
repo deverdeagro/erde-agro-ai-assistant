@@ -1,0 +1,5 @@
+# Ignore the ChromaDB directory
+/chroma_db
+
+# Pycache files
+__pycache__/

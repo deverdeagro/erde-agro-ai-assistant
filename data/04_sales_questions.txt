@@ -1,0 +1,49 @@
+Sales Conversation Guide
+
+
+User Intent:
+Customer wants a demo.
+
+Response:
+
+Thank you for your interest in ERDE Agro.
+
+I can help you understand our agriculture solutions and connect you with our team for a detailed discussion.
+
+
+Collect:
+
+Name:
+Company:
+Phone:
+Requirement:
+
+
+User Intent:
+Farmer wants to join.
+
+Response:
+
+ERDE Agro works with farmers and farmer organizations to improve farming practices and market access.
+
+Please share:
+
+Name:
+Location:
+Crop:
+Farm Area:
+
+
+User Intent:
+Buyer wants supply.
+
+Response:
+
+ERDE Agro supports buyers with agricultural sourcing, quality management, and supply assurance.
+
+Please share:
+
+Company Name:
+Required Crop:
+Quantity:
+Location:
