@@ -16,6 +16,9 @@ GREETING_KEYWORDS = {
     "bye", "goodbye", "good morning", "good afternoon", "good evening",
 }
 
+# Cross-encoder scores below this mean the question has no relevant match in our docs
+RELEVANCE_THRESHOLD = 0.0
+
 
 class AgentState(TypedDict):
     messages: Annotated[List[BaseMessage], operator.add]
@@ -74,6 +77,10 @@ def create_rag_chain():
 
         pairs = [(state["question"], doc.page_content) for doc in docs]
         scores = reranker.predict(pairs)
+
+        if max(scores) < RELEVANCE_THRESHOLD:
+            return {"retrieved_docs": []}
+
         ranked = sorted(zip(scores, docs), key=lambda x: x[0], reverse=True)
         return {"retrieved_docs": [doc for _, doc in ranked[:4]]}
 
@@ -92,8 +99,9 @@ def create_rag_chain():
         docs = state.get("retrieved_docs", [])
         if not docs:
             answer = (
-                "I don't have that information in my company documents. "
-                "Please contact ERDE Agro directly for more details."
+                "I can only answer questions about ERDE Agro products, services, and farming solutions. "
+                "That question is outside the scope of my knowledge base. "
+                "Please contact ERDE Agro directly if you need further assistance."
             )
             return {
                 "answer": answer,
