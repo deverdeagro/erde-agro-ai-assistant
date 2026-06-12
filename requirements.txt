@@ -4,6 +4,7 @@ langchain-ollama
 langchain-chroma
 langchain-huggingface
 langchain-text-splitters
+langgraph
 chromadb
 sentence-transformers
 pypdf

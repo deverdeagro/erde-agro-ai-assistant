@@ -1,62 +1,23 @@
-from vectorstore import create_vectorstore
-from llm import ask
+from rag_chain import create_rag_chain
 
+chain = create_rag_chain()
+session_id = "default_session"
 
-db = create_vectorstore()
-
-
-retriever = db.as_retriever(
-    search_kwargs={
-        "k":3
-    }
-)
-
+print("ERDE Agro AI Assistant ready. Type 'exit' to quit.\n")
 
 while True:
+    question = input("You: ").strip()
 
-    question = input(
-        "\nYou: "
-    )
+    if not question:
+        continue
 
-
-    if question.lower()=="exit":
+    if question.lower() == "exit":
+        print("Goodbye!")
         break
 
-
-    docs = retriever.invoke(
-        question
+    result = chain.invoke(
+        {"question": question},
+        config={"configurable": {"thread_id": session_id}},
     )
 
-
-    context = "\n\n".join(
-        [
-            d.page_content
-            for d in docs
-        ]
-    )
-
-
-    prompt = f"""
-You are ERDE Agro's AI assistant.
-
-Answer only using the context.
-
-Context:
-
-{context}
-
-
-Question:
-
-{question}
-
-"""
-
-
-    answer = ask(prompt)
-
-
-    print(
-        "\nAI:",
-        answer
-    )
+    print(f"\nAI: {result['answer']}\n")

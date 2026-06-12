@@ -1,11 +1,11 @@
-from langchain_ollama import OllamaLLM
+from langchain_ollama import ChatOllama
 
 
-llm = OllamaLLM(
-    model="llama3.1:8b",
-    base_url="http://localhost:11434"
+llm = ChatOllama(
+    model="qwen2.5:14b",
+    base_url="http://localhost:11434",
 )
 
 
-def ask(question):
-    return llm.invoke(question)
+def ask(question: str) -> str:
+    return llm.invoke(question).content
